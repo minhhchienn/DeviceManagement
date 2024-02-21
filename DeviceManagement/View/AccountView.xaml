@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="DeviceManagement.View.AccountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DeviceManagement.View"
+             xmlns:viewmodel="clr-namespace:DeviceManagement.ViewModel"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="1050"
+             VerticalAlignment="Stretch"
+             HorizontalAlignment="Stretch">
+    
+    <UserControl.DataContext>
+        <viewmodel:AccountViewModel/>
+    </UserControl.DataContext>
+
+    <Border Background="#F3F3F3"
+                Height="600"
+                Width="1050">
+        <Grid>
+            <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                           Text="Quản lý người dùng"
+                           Margin="20,20,0,0"
+                           Height="40"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left"
+                           FontWeight="SemiBold"/>
+            <Border Height="500"
+                        Width="1000"
+                        Margin="20,80,0,0"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        CornerRadius="20"
+                        Background="White">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="150"
+                            Height="450"
+                            BorderThickness="0,0,2,0"
+                            BorderBrush="#F3F3F3"
+                            Grid.Column="0">
+                        <StackPanel Orientation="Vertical">
+                            <RadioButton Content="Hồ sơ"
+                                         Style="{StaticResource TabButton}"
+                                         Command="{Binding ProfileCommand}"
+                                         IsChecked="True"/>
+                            <RadioButton Content="Bảo mật"
+                                         Style="{StaticResource TabButton}"
+                                         Command="{Binding SecurityCommand}"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Width="800"
+                            Height="500"
+                            Grid.Column="1">
+                        <ContentControl Content="{Binding CurrentViewModel}">
+                            <ContentControl.Resources>
+                                <DataTemplate DataType="{x:Type viewmodel:ProfileViewModel}">
+                                    <local:ProfileView/>
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type viewmodel:SecurityViewModel}">
+                                    <local:SecurityView/>
+                                </DataTemplate>
+                            </ContentControl.Resources>
+                        </ContentControl>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

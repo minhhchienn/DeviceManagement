@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="View\AccountView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\DeviceView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ExportView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\GuaranteeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ImportForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ImportView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LoginView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\MainView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ProfileView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\SecurityView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\TopPanel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Resources\Colors.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Converters.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\NavigationButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\SearchBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\TabButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\AccountView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\DeviceView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ExportView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\GuaranteeView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ImportForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ImportView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LoginView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\MainView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ProfileView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\SecurityView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\TopPanel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

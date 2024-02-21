@@ -1,0 +1,76 @@
+﻿<Window x:Class="DeviceManagement.View.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DeviceManagement.View"
+        xmlns:validation="clr-namespace:DeviceManagement.Validation"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewmodel="clr-namespace:DeviceManagement.ViewModel"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="LoginView" Height="450" Width="800">
+    <Window.DataContext>
+        <viewmodel:LoginViewModel/>
+    </Window.DataContext>
+    <Border>
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="{StaticResource loginBackgroundColor1}" Offset="0"/>
+                <GradientStop Color="{StaticResource loginBackgroundColor2}" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Border Width="300"
+                    Height="310"
+                    Background="White"
+                    CornerRadius="10"
+                    Visibility="Visible">
+                <StackPanel Orientation="Vertical"
+                            Width="260">
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                               Text="Đăng nhập"
+                               TextAlignment="Center"
+                               Margin="0,20,0,0"
+                               Foreground="#311E80" />
+                    <TextBox VerticalAlignment="Top"
+                             Margin="0,20,0,0"
+                             Width="250"
+                             materialDesign:HintAssist.Hint="Tên tài khoản"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="LoginUsername"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validation:NotEmptyValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>  
+                        </TextBox.Text>
+                    </TextBox>
+                    <PasswordBox Width="250"
+                                 Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}"
+                                 materialDesign:HintAssist.Hint="Mật khẩu"
+                                 Margin="0,30,0,0"
+                                 materialDesign:PasswordBoxAssist.Password="{Binding Path=LoginPassword, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True}">
+                    </PasswordBox>
+                    <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                               Foreground="#B00020"
+                               Margin="5,20,0,10"
+                               Height="20"
+                               Text="{Binding LoginInfo}"/>
+                    <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                        <Button Style="{StaticResource MaterialDesignPaperButton}"
+                                Content="Đăng ký"
+                                Width="115"
+                                Margin="5,0,0,0"/>
+                        <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="115"
+                                Content="Đăng nhập"
+                                Margin="20,0,5,0"
+                                Command="{Binding LoginCommand}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

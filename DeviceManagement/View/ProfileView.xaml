@@ -1,0 +1,197 @@
+﻿<UserControl x:Class="DeviceManagement.View.ProfileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DeviceManagement.View"
+             xmlns:viewmodel="clr-namespace:DeviceManagement.ViewModel"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:validation="clr-namespace:DeviceManagement.Validation"
+             xmlns:converter="clr-namespace:DeviceManagement.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewmodel:ProfileViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converter:BooleanToCollapseConverter x:Key="BooleanToCollapseConverter"/>
+    </UserControl.Resources>
+    
+    <Border Background="White"
+            CornerRadius="10">
+        <Border Width="750"
+                Height="450">
+            <Grid>
+                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                           Text="Hồ sơ"/>
+                <Border CornerRadius="10"
+                        BorderBrush="LightGray"
+                        BorderThickness="1"
+                        Height="100"
+                        Width="750"
+                        VerticalAlignment="Top"
+                        Margin="0,40,0,0">
+                    <Grid>
+                        <Ellipse Width="80" Height="80"
+                             HorizontalAlignment="Left"
+                             Margin="20,0,0,0">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="/DeviceManagement;component/Assets/Images/default-avatar.png"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                   Text="{Binding Name}"
+                                   VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,10,0,0"/>
+                        <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                   Text="{Binding Email}"
+                                   VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,40,0,0"/>
+                        <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                   Text="{Binding Position}"
+                                   VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="150,60,0,0"/>
+                    </Grid>
+                </Border>
+
+                <Border CornerRadius="10"
+                        BorderBrush="LightGray"
+                        BorderThickness="1"
+                        Height="290"
+                        Width="750"
+                        VerticalAlignment="Top"
+                        Margin="0,160,0,0">
+                    <Grid>
+                        <TextBlock Text="Thông tin cá nhân"
+                                   Style="{StaticResource MaterialDesignBody1TextBlock}"
+                                   Margin="20,10,0,0"/>
+                        <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                Width="60"
+                                Height="30"
+                                Content="Sửa"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Right"
+                                Margin="0,10,20,0"
+                                Visibility="{Binding IsEditingInfo, Converter={StaticResource BooleanToCollapseConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                Command="{Binding EditInfoCommand}"/>
+                        <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                Width="60"
+                                Height="30"
+                                Content="Hủy"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Right"
+                                Margin="0,10,20,0"
+                                Visibility="{Binding IsEditingInfo, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                Command="{Binding CancelEditCommand}"/>
+                        <Button Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                                Width="90"
+                                Height="30"
+                                Content="Xác nhận"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Right"
+                                Margin="0,10,100,0"
+                                Visibility="{Binding IsEditingInfo, Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                Command="{Binding ConfirmInfoCommand}"/>
+                        <TextBox materialDesign:HintAssist.Hint="Tên đăng nhập"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 VerticalAlignment="Top"
+                                 HorizontalAlignment="Left"
+                                 Margin="20,50,0,0"
+                                 Width="320"
+                                 IsEnabled="False">
+                            <TextBox.Text>
+                                <Binding Path="EditUsername"
+                                         UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox materialDesign:HintAssist.Hint="Quyền"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 VerticalAlignment="Top"
+                                 HorizontalAlignment="Right"
+                                 Margin="0,50,20,0"
+                                 Width="320"
+                                 IsEnabled="False">
+                            <TextBox.Text>
+                                <Binding Path="EditRole"
+                                         UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox materialDesign:HintAssist.Hint="Họ và tên"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 VerticalAlignment="Top"
+                                 HorizontalAlignment="Left"
+                                 Margin="20,130,0,0"
+                                 Width="320"
+                                 IsEnabled="{Binding IsEditingInfo}">
+                            <TextBox.Text>
+                                <Binding Path="EditName"
+                                         UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox materialDesign:HintAssist.Hint="Số điện thoại"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 VerticalAlignment="Top"
+                                 HorizontalAlignment="Right"
+                                 Margin="0,130,20,0"
+                                 Width="320"
+                                 IsEnabled="{Binding IsEditingInfo}">
+                            <TextBox.Text>
+                                <Binding Path="EditPhoneNumber"
+                                         UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox materialDesign:HintAssist.Hint="Email"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 VerticalAlignment="Top"
+                                 HorizontalAlignment="Left"
+                                 Margin="20,210,0,0"
+                                 Width="320"
+                                 IsEnabled="{Binding IsEditingInfo}">
+                            <TextBox.Text>
+                                <Binding Path="EditEmail"
+                                         UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox materialDesign:HintAssist.Hint="Chức vụ"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 VerticalAlignment="Top"
+                                 HorizontalAlignment="Right"
+                                 Margin="0,210,20,0"
+                                 Width="320"
+                                 IsEnabled="{Binding IsEditingInfo}">
+                            <TextBox.Text>
+                                <Binding Path="EditPosition"
+                                         UpdateSourceTrigger="PropertyChanged">
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Border>
+</UserControl>

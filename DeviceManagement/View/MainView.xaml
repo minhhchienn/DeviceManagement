@@ -1,0 +1,91 @@
+﻿<Window x:Class="DeviceManagement.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DeviceManagement.View"
+        xmlns:viewmodel="clr-namespace:DeviceManagement.ViewModel"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Quản lý thiết bị" Height="700" Width="1300">
+    <Window.DataContext>
+        <viewmodel:MainViewModel/>
+    </Window.DataContext>
+    <Border>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="#673AB7" Grid.Column="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="84"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="100"/>
+                    </Grid.RowDefinitions>
+                    <Image Source="../Assets/Images/hust_logo.png" Grid.Row="0"/>
+                    <StackPanel Orientation="Vertical" Grid.Row="1">
+                        <RadioButton Style="{StaticResource NavigationButton}"
+                                     Content="Quản lý thiết bị"
+                                     GroupName="MenuButton"
+                                     Command="{Binding DeviceCommand}"
+                                     IsChecked="True"/>
+                        <RadioButton Style="{StaticResource NavigationButton}"
+                                     Content="Quản lý phiếu nhập"
+                                     GroupName="MenuButton"
+                                     Command="{Binding ImportCommand}"/>
+                        <RadioButton Style="{StaticResource NavigationButton}"
+                                     Content="Quản lý phiếu xuất"
+                                     GroupName="MenuButton"
+                                     Command="{Binding ExportCommand}"/>
+                        <RadioButton Style="{StaticResource NavigationButton}"
+                                     Content="Quản lý bảo trì"
+                                     GroupName="MenuButton"
+                                     Command="{Binding GuaranteeCommand}"/>
+                    </StackPanel>
+                    <RadioButton Style="{StaticResource NavigationButton}"
+                                 Content="Quản lý tài khoản"
+                                 GroupName="MenuButton"
+                                 Grid.Row="2"
+                                 Command="{Binding AccountCommand}"/>
+                </Grid>
+            </Border>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="84"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <local:TopPanel Grid.Row="0"/>
+                <Border Grid.Row="1">
+                    <Viewbox Margin="0"
+                             VerticalAlignment="Stretch"
+                             HorizontalAlignment="Stretch">
+                        <Viewbox.Style>
+                            <Style TargetType="Viewbox"/>
+                        </Viewbox.Style>
+                        <ContentControl Content="{Binding CurrentViewModel}">
+                            <ContentControl.Resources>
+                                <DataTemplate DataType="{x:Type viewmodel:AccountViewModel}">
+                                    <local:AccountView/>
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type viewmodel:DeviceViewModel}">
+                                    <local:DeviceView/>
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type viewmodel:ImportViewModel}">
+                                    <local:ImportView/>
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type viewmodel:ExportViewModel}">
+                                    <local:ExportView/>
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type viewmodel:GuaranteeViewModel}">
+                                    <local:GuaranteeView/>
+                                </DataTemplate>
+                            </ContentControl.Resources>
+                        </ContentControl>
+                    </Viewbox>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
